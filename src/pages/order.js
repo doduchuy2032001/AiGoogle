@@ -36,7 +36,7 @@ function OrderPage() {
 
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center bg-white mx-6 p-4 h-3/4">
             <div>
                 <div className="mb-4 flex">
                     <input
