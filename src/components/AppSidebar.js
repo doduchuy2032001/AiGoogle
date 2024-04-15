@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { useCookies } from "react-cookie";
+
 
 import {
   CCloseButton,
@@ -23,22 +22,6 @@ import navigation from '../_nav'
 
 
 const AppSidebar = () => {
-  const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies(["token"]);
-  const logout = async () => {
-    try {
-      await fetch("https://mdvrp.test/api/logout", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${cookies.token}`,
-        },
-      });
-      removeCookie(['token']);
-      navigate("/login");
-    } catch (error) {
-      // Handle error
-    }
-  };
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
@@ -66,9 +49,11 @@ const AppSidebar = () => {
         />
       </CSidebarHeader>
       <AppSidebarNav items={navigation} />
-      <CSidebarFooter className="border-top d-none d-lg-flex">
-        <p onClick={logout} className='text-white ml-2'> Đăng xuất</p>
-      </CSidebarFooter>
+      {/* <CSidebarFooter className="border-top d-none d-lg-flex">
+      <CSidebarToggler
+          onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
+        />
+      </CSidebarFooter> */}
     </CSidebar>
   )
 }

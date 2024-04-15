@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useCookies } from "react-cookie";
 import {
   CAvatar,
   CBadge,
@@ -25,6 +27,22 @@ import CIcon from '@coreui/icons-react'
 import avatar8 from './../../assets/images/avatars/8.jpg'
 
 const AppHeaderDropdown = () => {
+  const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies(["token"]);
+  const logout = async () => {
+    try {
+      await fetch("http://localhost:81/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+        },
+      });
+      removeCookie(['token']);
+      navigate("/login");
+    } catch (error) {
+      // Handle error
+    }
+  };
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0 pe-0" caret={false}>
@@ -84,9 +102,9 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem href="#" onClick={logout}>
           <CIcon icon={cilLockLocked} className="me-2" />
-          Lock Account
+          Đăng xuất
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

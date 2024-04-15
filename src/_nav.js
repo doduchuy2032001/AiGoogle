@@ -17,7 +17,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Báo cáo',
-    to: '/settings',
+    to: '/dashboard',
     icon: <CIcon icon={cilClipboard} customClassName="nav-icon" />
   },
   {
@@ -32,28 +32,28 @@ const _nav = [
     to: '/shippingaddress',
     icon: <CIcon icon={cilBoatAlt} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'Sản phẩm',
-    to: '/googlemap',
-    icon: <CIcon icon={cilGift} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Sản phẩm',
+  //   to: '/googlemap',
+  //   icon: <CIcon icon={cilGift} customClassName="nav-icon" />,
+  // },
   {
     component: CNavItem,
     name: 'Phương tiện',
     to: '/vehicle',
     icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'khách hàng',
-    to: '/googlemap',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'khách hàng',
+  //   to: '/googlemap',
+  //   icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  // },
   {
     component: CNavItem,
     name: 'Tối ưu',
-    to: '/googlemap',
+    to: '/setting',
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
   },
   {
