@@ -8,6 +8,7 @@ const Logindiv = () => {
   const [password, setPassword] = useState("");
   const [cookies, setCookie] = useCookies(["token"]);
   const [isdivValid, setIsdivValid] = useState(false);
+  const [errosMess, setErrosMess] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,8 +39,9 @@ const Logindiv = () => {
       }),
     })
     if (response.status === 200) {
-      // Navigate to listnuoiem
       navigate("/dashboard");
+    } else {
+      setErrosMess("Login failed");
     }
   }
   return (
@@ -66,6 +68,7 @@ const Logindiv = () => {
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Sign in to your account
                 </h1>
+                <p className='text-red-700'>{errosMess}</p>
                 <div class="space-y-4 md:space-y-6" >
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
