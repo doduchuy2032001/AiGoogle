@@ -67,6 +67,12 @@ const _nav = [
     name: 'Googlemap',
     to: '/googlemap',
     icon: <CIcon icon={cilMap} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavGroup,
+    name: 'Add User',
+    to: '/user',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   }
 ];
 

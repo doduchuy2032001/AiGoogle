@@ -6,6 +6,7 @@ import Settings from "../pages/setting";
 import Vehicle from "../pages/vehicle";
 import Customer from "../pages/customer";
 import Dashboard from "../pages/dashboard";
+import User from "../pages/user";
 
 const publicRoutes = [
     {path: '/dashboard' , component: Dashboard},
@@ -14,7 +15,8 @@ const publicRoutes = [
     { path: '/order', component: OrderPage },
     { path: '/shippingaddress', component: ShippingAddressPage },
     { path: '/vehicle', component: Vehicle },
-    { path: '/customer', component: Customer},    
+    { path: '/customer', component: Customer},
+    { path: '/user' , component: User},    
     { path: '/login' , component: LoginPage, layout: null},
 ]
 const privateRoutes = [] ;
