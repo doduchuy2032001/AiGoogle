@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { API_URL } from '../utils/constant';
+import { useCookies } from 'react-cookie';
 
 const User = () => {
+    const [cookies] = useCookies(["token"]);
     const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -8,9 +11,10 @@ const User = () => {
     const [errosMess, setErrosMess] = useState("");
 
     async function addUser() {
-        const response = await fetch("https://mdvrp.test/api/admin/create", {
+        const response = await fetch(`${API_URL}/admin/create`, {
             method: "POST",
             headers: {
+                Authorization: `Bearer ${cookies.token}`,
                 "Content-Type": "application/json",
                 'Accept': 'application/json',
             },
@@ -24,7 +28,8 @@ const User = () => {
         });
 
         if (response.status === 200) {
-            // Handle success
+            const data = await response.json();
+            setErrosMess(data.mes)
         } else {
             setErrosMess("Create user failed");
         }
@@ -85,6 +90,9 @@ const User = () => {
                     <button onClick={addUser} className='p-2 bg-blue-600 text-white'>Add User</button>
                 </div>
             </div>
+            <p className='mt-4 text-base text-green-600'>
+                {errosMess}
+            </p>
         </div>
     );
 }

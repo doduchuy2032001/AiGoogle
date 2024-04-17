@@ -17,7 +17,7 @@ const publicRoutes = [
     { path: '/vehicle', component: Vehicle },
     { path: '/customer', component: Customer},
     { path: '/user' , component: User},    
-    { path: '/login' , component: LoginPage, layout: null},
+    { path: '/' , component: LoginPage, layout: null},
 ]
 const privateRoutes = [] ;
 export {publicRoutes , privateRoutes}

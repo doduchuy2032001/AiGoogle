@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from "react-cookie";
+import { API_URL } from '../../utils/constant';
 import {
   CAvatar,
   CBadge,
@@ -31,14 +32,14 @@ const AppHeaderDropdown = () => {
   const [cookies, removeCookie] = useCookies(["token"]);
   const logout = async () => {
     try {
-      await fetch("http://localhost:81/api/logout", {
+      await fetch(`${API_URL}/logout`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${cookies.token}`,
         },
       });
       removeCookie(['token']);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       // Handle error
     }
