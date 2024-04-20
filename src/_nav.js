@@ -52,15 +52,15 @@ const _nav = [
   // },
   {
     component: CNavItem,
-    name: 'Tối ưu',
-    to: '/setting',
-    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
+    name: 'Kho',
+    to: '/depot',
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Kho',
-    to: '/googlemap',
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+    name: 'Tối ưu',
+    to: '/settings',
+    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -69,7 +69,7 @@ const _nav = [
     icon: <CIcon icon={cilMap} customClassName="nav-icon" />,
   },
   {
-    component: CNavGroup,
+    component: CNavItem,
     name: 'Add User',
     to: '/user',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,

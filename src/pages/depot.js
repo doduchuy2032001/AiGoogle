@@ -1,22 +1,22 @@
 import { useState } from "react";
-import ReactPaginate
- from "react-paginate";
-function OrderPage() {
+import ReactPaginate from "react-paginate";
+
+function Depot() {
     const [searchName, setSearchName] = useState("");
     const [searchDate, setSearchDate] = useState("");
     const [currentPage, setCurrentPage] = useState(0);
     const dataPerPage = 5;
     const data = [
-        { id: 1, name: "John Doe", date: "2023-03-15", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
-        { id: 2, name: "Jane Smith", date: "2023-03-16", col1: "Data 1", col2: "Data 2", col3: "Data 3", col4: "Data 4", col5: "Data 5", col6: "Data 6", col7: "Data 7", col8: "Data 8", col9: "Data 9" },
+        { id: 1, name: "Kia", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 2, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 3, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 4, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 5, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 6, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 7, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 8, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 9, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may", col5: "20:00", col6: "Ready" },
+        { id: 10, name: "Mercedes", date: "30", col1: "300.000", col2: "12km/h", col3: "Lam", col4: "Xe may",col5: "20:00", col6: "Ready" },
     ];
     const filteredData = data.filter(
         (item) =>
@@ -36,7 +36,7 @@ function OrderPage() {
 
 
     return (
-        <div className="flex justify-center bg-white mx-6 p-4 h-3/4">
+        <div className="flex justify-center bg-white p-3 m-3 rounded-md">
             <div>
                 <div className="mb-4 flex">
                     <input
@@ -58,15 +58,11 @@ function OrderPage() {
                     <thead>
                     <tr>
                     <th className="border px-4 py-2">STT</th>
-                    <th className="border px-4 py-2">Tên</th>
-                    <th className="border px-4 py-2">Ngày đăng ký</th>
+                    <th className="border px-4 py-2">Tên kho</th>
+                    <th className="border px-4 py-2">Mã kho</th>
+                    <th className="border px-4 py-2">Kinh độ</th>
+                    <th className="border px-4 py-2">Vĩ độ</th>
                     <th className="border px-4 py-2">Địa chỉ</th>
-                    <th className="border px-4 py-2">Số điện thoại</th>
-                    <th className="border px-4 py-2">Số lượng đơn hàng</th>
-                    <th className="border px-4 py-2">Chiết khấu</th>
-                    <th className="border px-4 py-2">Doanh thu</th>
-                    <th className="border px-4 py-2">Hoa hồng</th>
-                    <th className="border px-4 py-2">Trạng thái</th>
                     <th className="border px-4 py-2">Thao tác</th>
                     </tr>
                     </thead>
@@ -79,10 +75,6 @@ function OrderPage() {
                         <td className="border px-4 py-2">{item.col1}</td>
                         <td className="border px-4 py-2">{item.col2}</td>
                         <td className="border px-4 py-2">{item.col3}</td>
-                        <td className="border px-4 py-2">{item.col4}</td>
-                        <td className="border px-4 py-2">{item.col5}</td>
-                        <td className="border px-4 py-2">{item.col6}</td>
-                        <td className="border px-4 py-2">{item.col7}</td>
                         <td className="border px-4 py-2">
                             <div className="flex gap-4">
                                 <p className="text-blue-600">Detail</p>
@@ -109,4 +101,4 @@ function OrderPage() {
         </div>
     )
 }
-export default OrderPage;
+export default Depot;

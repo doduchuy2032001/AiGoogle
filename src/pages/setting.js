@@ -18,40 +18,47 @@ function Settings() {
                             </label>
                         </div>
                         <div>
-                            <p>Thời gian chạy xe tối đa(giờ)</p>
+                            <p>Thời gian chạy xe tối đa trong một chuyến(giờ)</p>
                             <input className="outline-none p-1 border border-gray-300" />
                         </div>
                         <div>
-                            <p>giới hạn quãng đường</p>
+                            <p>Giới hạn quãng đường</p>
                             <label class="inline-flex items-center me-5 cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" />
                             <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
                             </label>
                         </div>
                         <div>
-                            <p>thời gian chạy thuật toán tối đa (phút)</p>
+                            <p>Quãng đường tối đa (km)</p>
                             <input className="outline-none p-1 border border-gray-300" />
                         </div>
                     </div>
                     <div className="flex gap-5 align-middle">
                         <div>
-                            <p>thời gian chạy thuật toán tối đa (phút)</p>
-                            <input className="outline-none p-1 border border-gray-300" />
+                            <p>Giới hạn số lượng xe</p>
+                            <label class="inline-flex items-center me-5 cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer" />
+                            <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+                            </label>
                         </div>
                         <div>
+                            <p>Giới hạn số lượng xe</p>
+                            <input className="outline-none p-1 border border-gray-300" />
+                        </div>
+                        {/* <div>
                             <p>Cho phép vi phạm khung thời gian</p>
                             <label class="inline-flex items-center me-5 cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" />
                             <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
                             </label>
-                        </div>
-                        <div>
+                        </div> */}
+                        {/* <div>
                             <p>Tự động loại trừ hàng hóa</p>
                             <label class="inline-flex items-center me-5 cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" />
                             <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
                             </label>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 

@@ -60,7 +60,7 @@ function Vehicle() {
                     <th className="border px-4 py-2">STT</th>
                     <th className="border px-4 py-2">Tên xe</th>
                     <th className="border px-4 py-2">Sức chứa(kg/m3)</th>
-                    <th className="border px-4 py-2">Phí di chuyển(km/VND)</th>
+                    {/* <th className="border px-4 py-2">Thời gian hoạt động</th> */}
                     <th className="border px-4 py-2">Vận tốc trung bình(km/h)</th>
                     <th className="border px-4 py-2">Tên lái xe</th>
                     <th className="border px-4 py-2">Loại xe</th>
@@ -73,7 +73,7 @@ function Vehicle() {
                         <td className="border px-4 py-2">{item.id}</td>
                         <td className="border px-4 py-2">{item.name}</td>
                         <td className="border px-4 py-2">{item.date}</td>
-                        <td className="border px-4 py-2">{item.col1}</td>
+                        {/* <td className="border px-4 py-2">{item.col1}</td> */}
                         <td className="border px-4 py-2">{item.col2}</td>
                         <td className="border px-4 py-2">{item.col3}</td>
                         <td className="border px-4 py-2">{item.col4}</td>

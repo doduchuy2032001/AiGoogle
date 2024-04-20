@@ -58,14 +58,14 @@ function ShippingAddressPage() {
                     <thead>
                     <tr>
                     <th className="border px-4 py-2">STT</th>
-                    <th className="border px-4 py-2">Mã lộ trình</th>
-                    <th className="border px-4 py-2">Tên lộ trình</th>
-                    <th className="border px-4 py-2">Hiệu suất</th>
-                    <th className="border px-4 py-2">Doanh thu</th>
-                    <th className="border px-4 py-2">Số lượng xe</th>
-                    <th className="border px-4 py-2">Tổng chi phí</th>
-                    <th className="border px-4 py-2">Ngày dự kiến</th>
-                    <th className="border px-4 py-2">Ngày giao dự kiến </th>
+                    <th className="border px-4 py-2">Mã đơn hàng</th>
+                    <th className="border px-4 py-2">Tên khách hàng</th>
+                    <th className="border px-4 py-2">Giá trị</th>
+                    <th className="border px-4 py-2">Khối lượng</th>
+                    <th className="border px-4 py-2">Địa chỉ</th>
+                    <th className="border px-4 py-2">Kinh độ</th>
+                    <th className="border px-4 py-2">Vĩ độ</th>
+                    <th className="border px-4 py-2">Thời gian phục vụ</th>
                     <th className="border px-4 py-2">Thao tác</th>
                     </tr>
                     </thead>
@@ -81,7 +81,13 @@ function ShippingAddressPage() {
                         <td className="border px-4 py-2">{item.col4}</td>
                         <td className="border px-4 py-2">{item.col5}</td>
                         <td className="border px-4 py-2">{item.col6}</td>
-                        <td className="border px-4 py-2">{item.col7}</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex gap-4">
+                                <p className="text-blue-600">Detail</p>
+                                <p className="text-yellow-500">Edit</p>
+                                <p className="text-red-600">Delete</p>
+                            </div>
+                        </td>
                       </tr>
                     ))}
                     </tbody>
