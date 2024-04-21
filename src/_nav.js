@@ -23,7 +23,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Đối tác',
-    to: '/order',
+    to: '/partner',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
   {

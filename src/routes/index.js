@@ -1,5 +1,6 @@
 import GoogleMapPage from "../pages/googlemap";
 import OrderPage from "../pages/order";
+import PartnerPage from "../pages/partner";
 import LoginPage from "../pages/login";
 import ShippingAddressPage from "../pages/shippingaddress";
 import Settings from "../pages/setting";
@@ -14,6 +15,7 @@ const publicRoutes = [
     { path: '/settings' , component: Settings},
     { path: '/googlemap', component: GoogleMapPage },
     { path: '/order', component: OrderPage },
+    { path: '/partner', component: PartnerPage },
     { path: '/shippingaddress', component: ShippingAddressPage },
     { path: '/vehicle', component: Vehicle },
     { path: '/customer', component: Customer},
