@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { API_URL } from '../utils/constant';
+import { useCookies } from 'react-cookie';
+
 function PartnerPage() {
     const [searchName, setSearchName] = useState("");
     const [searchDate, setSearchDate] = useState("");
@@ -14,6 +16,7 @@ function PartnerPage() {
         phone: '',
     });
     const dataPerPage = 5;
+    const [cookies] = useCookies(["token"]);
 
     const handlePageChange = ({ selected: selectedPage }) => {
         setCurrentPage(selectedPage);
@@ -32,6 +35,7 @@ function PartnerPage() {
                 headers: {
                     "Content-Type": "application/json",
                     'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + cookies.token,
                 },
                 body: JSON.stringify(form),
             });
@@ -49,6 +53,7 @@ function PartnerPage() {
                 headers: {
                     "Content-Type": "application/json",
                     'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + cookies.token,
                 },
                 body: JSON.stringify(form),
             });
@@ -91,6 +96,7 @@ function PartnerPage() {
             headers: {
               "Content-Type": "application/json",
               'Accept': 'application/json',
+              'Authorization': 'Bearer ' + cookies.token,
             }
         });
         if (response.status === 200) {
