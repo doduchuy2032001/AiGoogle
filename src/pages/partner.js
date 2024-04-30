@@ -113,6 +113,7 @@ function PartnerPage() {
             headers: {
               "Content-Type": "application/json",
               'Accept': 'application/json',
+              'Authorization': 'Bearer ' + cookies.token,
             }
         });
         if (response.status === 200) {
@@ -162,11 +163,11 @@ function PartnerPage() {
                     <tr>
                     <th className="border px-4 py-2">STT</th>
                     <th className="border px-4 py-2">Tên</th>
-                    <th className="border px-4 py-2">Ngày đăng ký</th>
+                    {/* <th className="border px-4 py-2">Ngày đăng ký</th> */}
                     <th className="border px-4 py-2">Địa chỉ</th>
                     <th className="border px-4 py-2">Số điện thoại</th>
                     <th className="border px-4 py-2">Số lượng đơn hàng</th>
-                    <th className="border px-4 py-2">Chiết khấu</th>
+                    {/* <th className="border px-4 py-2">Chiết khấu</th> */}
                     <th className="border px-4 py-2">Doanh thu</th>
                     <th className="border px-4 py-2">Hoa hồng</th>
                     <th className="border px-4 py-2">Trạng thái</th>
@@ -178,11 +179,11 @@ function PartnerPage() {
                         <tr key={item.id}>
                         <td className="border px-4 py-2">{item.id}</td>
                         <td className="border px-4 py-2">{item.name}</td>
-                        <td className="border px-4 py-2">{item.register_date}</td>
+                        {/* <td className="border px-4 py-2">{item.register_date}</td> */}
                         <td className="border px-4 py-2">{item.address}</td>
                         <td className="border px-4 py-2">{item.phone}</td>
                         <td className="border px-4 py-2">{item.number_of_order}</td>
-                        <td className="border px-4 py-2">{item.discount}</td>
+                        {/* <td className="border px-4 py-2">{item.discount}</td> */}
                         <td className="border px-4 py-2">{item.revenue}</td>
                         <td className="border px-4 py-2">{item.commission}</td>
                         <td className="border px-4 py-2">{item.status}</td>
