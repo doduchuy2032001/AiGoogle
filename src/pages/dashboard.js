@@ -1,13 +1,6 @@
 import React from 'react'
 import { CCard, CCardBody, CCol, CCardHeader, CRow } from '@coreui/react'
-import {
-  CChartBar,
-  CChartDoughnut,
-  CChartLine,
-  CChartPie,
-  CChartPolarArea,
-  CChartRadar,
-} from '@coreui/react-chartjs'
+import { LineChart } from '../components/chart/LineChart'
 // import { DocsCallout } from 'src/components'
 
 const DashBoard = () => {
@@ -65,7 +58,7 @@ const DashBoard = () => {
             </div>  
           </div>
           <div>
-
+              <LineChart />
           </div>
         </div>
         <div className='p-4'>
