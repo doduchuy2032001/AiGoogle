@@ -4,10 +4,10 @@ import { API_URL2 } from "../utils/constant";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AddPartnerForm from "../components/partner/AddPartnerForm";
-import PartnerDetailForm from "../components/partner/PartnerDetailForm";
+import AddProductForm from "../components/product/AddProductForm";
+import ProductDetailForm from "../components/product/ProductDetailForm";
 
-function PartnerPage() {
+function Product() {
   const [orderBy, setOrderBy] = useState("id");
   const [sortBy, setSortBy] = useState("asc");
   const [searchType, setSearchType] = useState("name");
@@ -16,11 +16,8 @@ function PartnerPage() {
   // const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  const [currentOrderPage, setCurrentOrderPage] = useState(1);
-  const [orderPageCount, setOrderPageCount] = useState(0);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [selectedPartner, setSelectedPartner] = useState(null);
-  const [selectedPartnerOrders, setSelectedPartnerOrders] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [showDetailForm, setShowDetailForm] = useState(false);
   const dataPerPage = 10;
   const [cookies] = useCookies(["token"]);
@@ -30,29 +27,8 @@ function PartnerPage() {
     handleLoadData(selectedPage + 1);
   };
 
-  const handleDelete = async (item) => {
-    try {
-      const response = await fetch(`${API_URL2}/api/admin/partner/${item.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: "Bearer " + cookies.token,
-        },
-      });
-      if (response.status === 200) {
-        toast.success("Item successfully deleted.");
-        handleLoadData(currentPage);
-      } else {
-        throw new Error("Failed to delete item");
-      }
-    } catch (error) {
-      toast.error("Error: " + error.message);
-    }
-  };
-
   const handleLoadData = async (page = currentPage) => {
-    const url = new URL(`${API_URL2}/api/admin/partner`);
+    const url = new URL(`${API_URL2}/api/admin/product`);
     url.searchParams.append("pageSize", dataPerPage);
     url.searchParams.append("order_by", orderBy);
     url.searchParams.append("sort_by", sortBy);
@@ -60,10 +36,8 @@ function PartnerPage() {
 
     if (searchType === "name") {
       url.searchParams.append("name", searchTerm);
-    } else if (searchType === "address") {
-      url.searchParams.append("address", searchTerm);
-    } else if (searchType === "phone") {
-      url.searchParams.append("phone", searchTerm);
+    } else if (searchType === "sku") {
+      url.searchParams.append("sku", searchTerm);
     }
 
     const response = await fetch(url, {
@@ -88,7 +62,11 @@ function PartnerPage() {
     }
   };
 
-  const handleAddPartner = () => {
+  useEffect(() => {
+    handleLoadData();
+  }, [currentPage, searchType, searchTerm, orderBy, sortBy]);
+
+  const handleAddProduct = () => {
     setShowAddForm(true);
   };
 
@@ -96,97 +74,8 @@ function PartnerPage() {
     setShowAddForm(false);
   };
 
-  const handlePartnerAdded = () => {
+  const handleProductAdded = () => {
     handleLoadData(currentPage);
-  };
-
-  const handleShowDetail = async (item) => {
-    try {
-      const response = await fetch(
-        `${API_URL2}/api/admin/partner/${item.id}?page=1&pageSize=5`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + cookies.token,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setSelectedPartner(data.data.partner);
-        setSelectedPartnerOrders(data.data.orders);
-        setCurrentOrderPage(data.current_page);
-        setOrderPageCount(data.last_page);
-        setShowDetailForm(true);
-      } else {
-        throw new Error("Failed to fetch partner details");
-      }
-    } catch (error) {
-      toast.error("Error: " + error.message);
-    }
-  };
-
-  const handleOrderPageChange = async (selectedPage) => {
-    const currentPage = selectedPage.selected + 1;
-    try {
-      const response = await fetch(
-        `${API_URL2}/api/admin/partner/${selectedPartner.id}?page=${currentPage}&pageSize=5`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + cookies.token,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setSelectedPartnerOrders(data.data.orders);
-        setCurrentOrderPage(data.current_page);
-      } else {
-        throw new Error("Failed to fetch partner orders");
-      }
-    } catch (error) {
-      toast.error("Error: " + error.message);
-    }
-  };
-
-  const handleCloseDetailForm = () => {
-    setSelectedPartner(null);
-    setShowDetailForm(false);
-  };
-
-  const handlePartnerUpdated = async (updatedPartner) => {
-    try {
-      setSelectedPartner(updatedPartner);
-      const response = await fetch(
-        `${API_URL2}/api/admin/partner/${updatedPartner.id}?page=${currentOrderPage}&pageSize=5`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + cookies.token,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setSelectedPartnerOrders(data.data.orders);
-        setOrderPageCount(data.last_page);
-        handleLoadData(currentPage); // Tải lại dữ liệu partner cho bảng danh sách
-      } else {
-        throw new Error("Failed to fetch updated partner orders");
-      }
-    } catch (error) {
-      toast.error("Error: " + error.message);
-    }
   };
 
   const handleSort = (column) => {
@@ -204,9 +93,79 @@ function PartnerPage() {
     return "";
   };
 
-  useEffect(() => {
-    handleLoadData();
-  }, [currentPage, searchType, searchTerm, orderBy, sortBy]);
+  const handleDelete = async (item) => {
+    try {
+      const response = await fetch(`${API_URL2}/api/admin/product/${item.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + cookies.token,
+        },
+      });
+      if (response.status === 200) {
+        toast.success("Product successfully deleted.");
+        handleLoadData(currentPage);
+      } else {
+        throw new Error("Failed to delete item");
+      }
+    } catch (error) {
+      toast.error("Error: " + error.message);
+    }
+  };
+
+  const handleShowDetail = async (item) => {
+    try {
+      const response = await fetch(`${API_URL2}/api/admin/product/${item.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + cookies.token,
+        },
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setSelectedProduct(data.data);
+        setShowDetailForm(true);
+      } else {
+        throw new Error("Failed to fetch product details");
+      }
+    } catch (error) {
+      toast.error("Error: " + error.message);
+    }
+  };
+
+  const handleCloseDetailForm = () => {
+    setSelectedProduct(null);
+    setShowDetailForm(false);
+  };
+
+  const handleProductUpdated = async (updatedProduct) => {
+    try {
+      const response = await fetch(
+        `${API_URL2}/api/admin/product/${updatedProduct.id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + cookies.token,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setSelectedProduct(data.data);
+      } else {
+        throw new Error("Failed to fetch updated product details");
+      }
+    } catch (error) {
+      toast.error("Error: " + error.message);
+    }
+  };
 
   return (
     <div className="flex justify-center bg-white p-3 m-3 rounded-md">
@@ -221,7 +180,6 @@ function PartnerPage() {
         draggable
         pauseOnHover
       />
-
       <div className="w-full">
         {!showAddForm && !showDetailForm ? (
           <>
@@ -233,17 +191,13 @@ function PartnerPage() {
                   className="border border-gray-300 p-2 rounded-md mr-2"
                 >
                   <option value="name">Name</option>
-                  <option value="address">Address</option>
-                  <option value="phone">Phone</option>
+                  <option value="sku">SKU</option>
+                  {/* <option value="phone">Phone</option> */}
                 </select>
                 <input
                   type="text"
                   placeholder={`Search by ${
-                    searchType === "name"
-                      ? "Name"
-                      : searchType === "address"
-                      ? "Address"
-                      : "Phone"
+                    searchType === "name" ? "Name" : "SKU"
                   }`}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -252,15 +206,15 @@ function PartnerPage() {
               </div>
               <div>
                 <button
-                  onClick={handleAddPartner}
+                  onClick={handleAddProduct}
                   className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 >
                   Add
                 </button>
               </div>
+
               {/* ... */}
             </div>
-
             <table className="min-w-full">
               <thead>
                 <tr>
@@ -273,35 +227,41 @@ function PartnerPage() {
                     ID
                   </th>
                   <th
-                    className={`border px-4 py-2 w-1/6 cursor-pointer ${getSortIcon(
+                    className={`border px-4 py-2 cursor-pointer ${getSortIcon(
                       "name"
                     )}`}
                     onClick={() => handleSort("name")}
                   >
                     Name
                   </th>
-                  {/* <th className="border px-4 py-2">Ngày đăng ký</th> */}
-                  <th
-                    className={`border px-4 py-2 w-1/2 cursor-pointer ${getSortIcon(
-                      "address"
-                    )}`}
-                    onClick={() => handleSort("address")}
-                  >
-                    Address
-                  </th>
-                  <th className="border px-4 py-2 ">Phone</th>
-                  <th className="border px-4 py-2 w-1/8">Quantity</th>
-                  {/* <th className="border px-4 py-2">Chiết khấu</th> */}
-                  <th className="border px-4 py-2">Revenue</th>
-                  <th className="border px-4 py-2">Commission</th>
+                  <th className="border px-4 py-2">SKU</th>
+                  <th className="border px-4 py-2 ">Description</th>
                   <th
                     className={`border px-4 py-2 cursor-pointer ${getSortIcon(
-                      "status"
+                      "price"
                     )}`}
-                    onClick={() => handleSort("status")}
+                    onClick={() => handleSort("price")}
                   >
-                    Status
+                    Price
                   </th>
+                  <th
+                    className={`border px-4 py-2 cursor-pointer ${getSortIcon(
+                      "cost"
+                    )}`}
+                    onClick={() => handleSort("cost")}
+                  >
+                    Cost
+                  </th>
+                  <th
+                    className={`border px-4 py-2 cursor-pointer ${getSortIcon(
+                      "quantity"
+                    )}`}
+                    onClick={() => handleSort("quantity")}
+                  >
+                    Quantity
+                  </th>
+                  <th className="border px-4 py-2 ">Image</th>
+                  <th className="border px-4 py-2">Status</th>
                   <th className="border px-4 py-2">Operation</th>
                 </tr>
               </thead>
@@ -310,15 +270,12 @@ function PartnerPage() {
                   <tr key={item.id}>
                     <td className="border px-4 py-2">{item.id}</td>
                     <td className="border px-4 py-2">{item.name}</td>
-                    {/* <td className="border px-4 py-2">{item.register_date}</td> */}
-                    <td className="border px-4 py-2">{item.address}</td>
-                    <td className="border px-4 py-2">{item.phone}</td>
-                    <td className="border px-4 py-2">{item.number_of_order}</td>
-                    {/* <td className="border px-4 py-2">{item.discount}</td> */}
+                    <td className="border px-4 py-2">{item.sku}</td>
+                    <td className="border px-4 py-2">{item.description}</td>
                     <td className="border px-4 py-2">
                       {" "}
-                      {item.revenue
-                        ? parseFloat(item.revenue).toLocaleString("vi-VN", {
+                      {item.price
+                        ? parseFloat(item.price).toLocaleString("vi-VN", {
                             minimumFractionDigits: 0,
                             maximumFractionDigits: 0,
                           })
@@ -326,15 +283,23 @@ function PartnerPage() {
                     </td>
                     <td className="border px-4 py-2">
                       {" "}
-                      {item.commission
-                        ? parseFloat(item.commission).toLocaleString("vi-VN", {
+                      {item.cost
+                        ? parseFloat(item.cost).toLocaleString("vi-VN", {
                             minimumFractionDigits: 0,
                             maximumFractionDigits: 0,
                           })
                         : ""}
                     </td>
+                    <td className="border px-4 py-2">{item.quantity}</td>
                     <td className="border px-4 py-2">
-                      {item.status === "Active" ? (
+                      <img
+                        src={`${API_URL2}/images/products/${item.image}`}
+                        alt="img"
+                        className="w-15 h-15 object-cover"
+                      />
+                    </td>
+                    <td className="border px-4 py-2">
+                      {item.status === "active" ? (
                         <span className="text-green-500">Active</span>
                       ) : (
                         <span className="text-red-500">Inactive</span>
@@ -360,7 +325,6 @@ function PartnerPage() {
                 ))}
               </tbody>
             </table>
-
             <ReactPaginate
               previousLabel={"Previous"}
               nextLabel={"Next"}
@@ -375,23 +339,19 @@ function PartnerPage() {
             />
           </>
         ) : showAddForm ? (
-          <AddPartnerForm
+          <AddProductForm
             onClose={handleCloseAddForm}
-            onPartnerAdded={handlePartnerAdded}
+            onProductAdded={handleProductAdded}
           />
         ) : (
-          <PartnerDetailForm
-            partner={selectedPartner}
-            orders={selectedPartnerOrders}
-            currentPage={currentOrderPage}
-            pageCount={orderPageCount}
+          <ProductDetailForm
+            product={selectedProduct}
             onClose={handleCloseDetailForm}
-            onPartnerUpdated={handlePartnerUpdated}
-            onPageChange={handleOrderPageChange}
+            onProductUpdated={handleProductUpdated}
           />
         )}
       </div>
     </div>
   );
 }
-export default PartnerPage;
+export default Product;

@@ -12,26 +12,21 @@ const User = () => {
     const [role, setRole] = useState("");
     const [errosMess, setErrosMess] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageCount, setPageCount] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
     const [currentPageData, setCurrentPageData] = useState([]);
-    const dataPerPage = 2;
+    const dataPerPage = 5;
     const [showForm, setShowForm] = useState(false);
 
     const handlePageChange = ({ selected: selectedPage }) => {
-        if (currentPage === 2) {
-            setCurrentPage(selectedPage - 1);
-        }
-        else {
-            setCurrentPage(selectedPage + 1);
-        }
-    };
+        setCurrentPage(selectedPage + 1);
+      };
 
     const handleAdd = () => {
         setShowForm(true);
     }
 
     async function addUser() {
-        const response = await fetch(`${API_URL}/admin/create`, {
+        const response = await fetch(`${API_URL}/api/admin/create`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${cookies.token}`,
@@ -55,7 +50,7 @@ const User = () => {
         }
     }
     const handleBan = async (item) => {
-        const response = await fetch(`${API_URL}/admin/ban/user/${item.id}`, {
+        const response = await fetch(`${API_URL}/api/admin/ban/user/${item.id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -67,11 +62,11 @@ const User = () => {
             alert('Ban thành công');
             handleLoadData();
         } else {
-            alert('Xóa thất bại');
+            alert('Ban thất bại');
         }
     }
     const handleUnBan = async (item) => {
-        const response = await fetch(`${API_URL}/admin/unban/user/${item.id}`, {
+        const response = await fetch(`${API_URL}/api/admin/unban/user/${item.id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -80,14 +75,14 @@ const User = () => {
             }
         });
         if (response.status === 200) {
-            alert('Ban thành công');
+            alert('Unban thành công');
             handleLoadData();
         } else {
-            alert('Xóa thất bại');
+            alert('Unban thất bại');
         }
     }
     const handleLoadData = async () => {
-        const response = await fetch(`${API_URL}/admin/users?pageSize=${dataPerPage}&page=${currentPage}`, {
+        const response = await fetch(`${API_URL}/api/admin/users?pageSize=${dataPerPage}&page=${currentPage}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -116,7 +111,7 @@ const User = () => {
                 <div className="mb-4 flex justify-end">
                     <div className=''>
                         <button
-                            className="bg-slate-400 border-slate-600 border-2 border-solid text-white py-2 px-4 rounded-md"
+                            className="bg-blue-600 text-white py-2 px-4 rounded-md"
                             onClick={handleAdd}
                         >
                             Add
@@ -126,7 +121,7 @@ const User = () => {
                 <table className="min-w-full">
                     <thead>
                         <tr>
-                            <th className="border px-4 py-2">STT</th>
+                            <th className="border px-4 py-2">ID</th>
                             <th className="border px-4 py-2">Username</th>
                             <th className="border px-4 py-2">Email</th>
                             <th className="border px-4 py-2">Role</th>
@@ -170,6 +165,7 @@ const User = () => {
                     nextLinkClassName={"pagination__link"}
                     disabledClassName={"pagination__link--disabled"}
                     activeClassName={"pagination__link--active"}
+                    forcePage={currentPage - 1}
                 />
             </div>)}
             {showForm && (
@@ -226,10 +222,11 @@ const User = () => {
                             <option value={3}>Driver</option>
                         </select>
                     </div>
-                    <div className='flex justify-end mt-6'>
+                    <div className='flex justify-between mt-6'>
+                        <button onClick={() => setShowForm(false)} className='py-2 px-4 bg-gray-600 text-white rounded-md'>Back</button>
                         <button onClick={addUser} className='py-2 px-4 bg-blue-600 text-white rounded-md'>Add User</button>
                     </div>
-                    <p className='mt-4 text-base text-green-600'>
+                    <p className='mt-4 text-base text-red-600'>
                         {errosMess}
                     </p>
                 </div>
